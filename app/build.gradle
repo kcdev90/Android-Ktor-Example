@@ -1,0 +1,102 @@
+plugins {
+    id "com.android.application"
+    id "dagger.hilt.android.plugin"
+    id "kotlin-android"
+    id "kotlin-kapt"
+}
+
+def APP_NAME = "photoviewer"
+
+def MAJOR = 1
+def MINOR = 0
+def PATCH = 0
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.kcthomas.$APP_NAME"
+        minSdk 28
+        targetSdk 32
+
+        // Guarantees versionCode will always be unique and increase on version upgrade
+        versionCode 10000*MAJOR + 100*MINOR + PATCH
+        versionName "$MAJOR.$MINOR.$PATCH"
+
+        // Give the APK a more readable name
+        archivesBaseName = "$APP_NAME-$versionName"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+        }
+        release {
+            // Obfuscate code
+            minifyEnabled true
+
+            // Shrink resources size
+            shrinkResources true
+
+            // Make app difficult to reverse engineer
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+    }
+}
+
+dependencies {
+    // Mark other modules as a dependency
+    implementation project(":core")
+    implementation project(":data")
+    implementation project(":domain")
+
+    // Android X
+    implementation "androidx.core:core-ktx:1.8.0"
+    implementation "androidx.appcompat:appcompat:1.4.2"
+    implementation "androidx.activity:activity-compose:1.5.0"
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+//    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.0"
+
+    // Material
+    implementation "com.google.android.material:material:1.6.1"
+
+    // Jetpack Compose
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    // OK HTTP
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+
+    // Coil
+    implementation "io.coil-kt:coil-compose:2.1.0"
+}

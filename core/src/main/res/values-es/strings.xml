@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="photo">Foto</string>
+    <string name="photo_list_error_load">Error al cargar fotos</string>
+    <string name="photo_list_error_load_next_page">No se pudo cargar la página siguiente: toque para volver a intentarlo</string>
+    <string name="photo_list_no_data">No hay fotos para mostrar</string>
+</resources>

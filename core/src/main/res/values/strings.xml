@@ -1,0 +1,6 @@
+<resources>
+    <string name="photo">Photo</string>
+    <string name="photo_list_error_load">Failed to load photos</string>
+    <string name="photo_list_error_load_next_page">Failed to load next page: tap to retry</string>
+    <string name="photo_list_no_data">No photos to display</string>
+</resources>
